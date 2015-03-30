@@ -64,12 +64,12 @@ class ProxyClient implements HttpClient
      * @access public
      * @return void
      */
-    public function lookup(array $queris = array())
+    public function lookup(array $queries = array())
     {
         try {
             $request = $this->getClient()->createRequest($this->lookupMethod, $this->lookupUri, array('query' => $queries));
 
-            $response = $this->send($request);
+            $response = $this->getClient()->send($request);
         } catch(\Exception $ex) {
             throw new \RuntimeException('Failed to get response', 0, $ex);
         }
