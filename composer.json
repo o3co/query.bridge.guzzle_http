@@ -14,10 +14,6 @@
 		"o3co/query-extension-http": "~0.2",
         "guzzlehttp/guzzle": "~5.0"
 	},
-	"require-dev" : {
-		"o3co/query-core": "~0.2@dev",
-		"o3co/query-extension-http": "~0.2@dev"
-	},
 	"autoload": {
 		"psr-4": {
 			"O3Co\\Query\\Bridge\\GuzzleHttp\\": ""
