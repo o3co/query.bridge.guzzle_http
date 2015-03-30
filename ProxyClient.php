@@ -31,8 +31,23 @@ class ProxyClient implements HttpClient
      */
     private $lookupMethod = 'get';
 
+    /**
+     * lookupUri 
+     * 
+     * @var mixed
+     * @access private
+     */
     private $lookupUri;
 
+    /**
+     * __construct 
+     * 
+     * @param GuzzleClient $client 
+     * @param mixed $lookupUri 
+     * @param string $lookupMethod 
+     * @access public
+     * @return void
+     */
     public function __construct(GuzzleClient $client = null, $lookupUri = null, $lookupMethod = 'get')
     {
         $this->client = $client;
@@ -125,11 +140,24 @@ class ProxyClient implements HttpClient
         return $this;
     }
 
+    /**
+     * getClient 
+     * 
+     * @access public
+     * @return void
+     */
     public function getClient()
     {
         return $this->client;
     }
     
+    /**
+     * setClient 
+     * 
+     * @param GuzzleClient $client 
+     * @access public
+     * @return void
+     */
     public function setClient(GuzzleClient $client)
     {
         $this->client = $client;
