@@ -10,7 +10,8 @@
 	"license": "MIT",
 	"require" : {
 		"php" : ">=5.3.2",
-		"o3co/query-core": "~0.2dev",
+		"o3co/query-core": "~0.2",
+		"o3co/query-extension-http": "~0.2",
         "guzzlehttp/guzzle": "~5.0"
 	},
 	"autoload": {
