@@ -8,7 +8,7 @@ use O3Co\Query\Extension\Http\Client as HttpClient;
  * ProxyClient 
  * 
  * @uses HttpClient
- * @package { PACKAGE }
+ * @package \O3Co\Query
  * @copyright Copyrights (c) 1o1.co.jp, All Rights Reserved.
  * @author Yoshi<yoshi@1o1.co.jp> 
  * @license MIT
