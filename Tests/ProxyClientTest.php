@@ -10,7 +10,7 @@ use GuzzleHttp\Client as GuzzleClient;
  * @package { PACKAGE }
  * @copyright Copyrights (c) 1o1.co.jp, All Rights Reserved.
  * @author Yoshi<yoshi@1o1.co.jp> 
- * @license { LICENSE }
+ * @license MIT
  */
 class ProxyClientTest extends \PHPUnit_Framework_TestCase 
 {
