@@ -15,12 +15,12 @@ use GuzzleHttp\Client as GuzzleClient;
 class ProxyClientTest extends \PHPUnit_Framework_TestCase 
 {
     /**
-     * testConstruct 
+     * testGetSet 
      * 
      * @access public
      * @return void
      */
-    public function testConstruct()
+    public function testGetterSetter()
     {
         $guzzleClient = new GuzzleClient();
         $client = new ProxyClient($guzzleClient, 'http://foo', 'get');
@@ -28,6 +28,36 @@ class ProxyClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($guzzleClient, $client->getClient());
         $this->assertEquals('http://foo', $client->getLookupUri());
         $this->assertEquals('get', $client->getLookupMethod());
+
+        $client->setLookupUri('http://bar');
+        $this->assertEquals('http://bar', $client->getLookupUri());
+
+        $client->setLookupMethod('post');
+        $this->assertEquals('post', $client->getLookupMethod());
+
+        $client->setClient($guzzleClient);
+        $this->assertEquals($guzzleClient, $client->getClient());
+    }
+
+    public function testLookup()
+    {
+
+        $guzzleClient = new GuzzleClient();
+        $body = \GuzzleHttp\Stream\Stream::factory(json_encode(array(
+                'foo' => 'Foo'
+            )));
+        $mock = new \GuzzleHttp\Subscriber\Mock([
+                new \GuzzleHttp\Message\Response(200, ['Content-Type' => 'application/json'], $body),
+            ]);
+
+        $guzzleClient->getEmitter()->attach($mock);
+
+
+        $client = new ProxyClient($guzzleClient, 'http://foo', 'get');
+
+        $response = $client->lookup(array('q' => 'test', 'size' => 10));
+
+        $this->assertEquals(array('foo' => 'Foo'), $response);
     }
 }
 
