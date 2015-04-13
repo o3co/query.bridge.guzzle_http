@@ -55,6 +55,26 @@ class ProxyClient implements HttpClient
         $this->lookupMethod = $lookupMethod;
     }
 
+    protected function requestLookup(array $queries, array $options = array())
+    {
+        switch(strtolower($this->lookupMethod)) {
+        case 'get':
+            $options['query'] = isset($options['query'])
+                ? array_merge($options['query'], $queries)
+                : $queries;
+            break;
+        case 'post':
+            $options['json'] = isset($options['json'])
+                ? array_merge($options['json'], $queries)
+                : $queries;
+            break;
+        default:
+            throw new \RuntimeException('LookupMethod requires either GET or POST. Other is not impled.');
+        }
+
+        return $this->getClient()->createRequest($this->lookupMethod, $this->lookupUri, $options);
+    }
+
     /**
      * lookup 
      * 
@@ -67,8 +87,7 @@ class ProxyClient implements HttpClient
     public function lookup(array $queries = array())
     {
         try {
-            $request = $this->getClient()->createRequest($this->lookupMethod, $this->lookupUri, array('query' => $queries));
-
+            $request  = $this->requestLookup($queries);
             $response = $this->getClient()->send($request);
         } catch(\Exception $ex) {
             throw new \RuntimeException('Failed to get response', 0, $ex);
